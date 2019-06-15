@@ -1,4 +1,7 @@
 package com.application.mvvmmusicplayer.services
 
-class MusicPlayerService {
+import android.media.MediaPlayer
+
+class MVVMMusicPlayerService: MediaPlayer() {
+
 }
