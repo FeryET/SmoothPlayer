@@ -100,6 +100,8 @@ private fun Cursor.createAlbumModel(): AlbumModel{
         return AlbumModel(
             getData(ProjectionProperties.ALBUM,map),
             getData(ProjectionProperties.ARTIST,map),
+            getData(ProjectionProperties.ALBUM_ID, map),
+            getData(ProjectionProperties.ALBUM_ART, map),
             null)
     }
 }
@@ -108,6 +110,7 @@ private fun Cursor.createArtistModel(): ArtistModel{
     ARTIST_SEARCH_PROJECTION.also { map ->
         return ArtistModel(
             getData(ProjectionProperties.ARTIST,map),
+            getData(ProjectionProperties.ARTIST_ID, map),
             null
         )
     }
