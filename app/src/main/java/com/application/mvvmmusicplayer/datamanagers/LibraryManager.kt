@@ -1,13 +1,11 @@
-package com.application.mvvmmusicplayer.repositories
+package com.application.mvvmmusicplayer.datamanagers
 
 import android.content.Context
-import android.database.Cursor
 import android.provider.MediaStore
 import com.application.mvvmmusicplayer.factories.createLibrary
 import com.application.mvvmmusicplayer.models.AlbumModel
 import com.application.mvvmmusicplayer.models.ArtistModel
 import com.application.mvvmmusicplayer.models.SongModel
-import com.application.mvvmmusicplayer.utils.getData
 
 
 class LibraryManager(private val context: Context) {

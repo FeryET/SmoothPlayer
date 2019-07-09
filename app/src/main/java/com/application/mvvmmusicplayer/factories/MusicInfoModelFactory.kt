@@ -17,7 +17,7 @@ enum class ProjectionProperties{
     ALBUM_ID, ARTIST_ID, DATA, ARTIST_KEY,
     TITLE
 }
-val ALBUM_SEARCH_PROJECTION = hashMapOf<ProjectionProperties, String>(
+val ALBUM_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.Albums._ID,
     ProjectionProperties.ALBUM to MediaStore.Audio.Albums.ALBUM,
     ProjectionProperties.ARTIST to MediaStore.Audio.Albums.ARTIST,
@@ -26,14 +26,14 @@ val ALBUM_SEARCH_PROJECTION = hashMapOf<ProjectionProperties, String>(
     ProjectionProperties.NUM_OF_SONGS to MediaStore.Audio.Albums.NUMBER_OF_SONGS
 )
 
-val ARTIST_SEARCH_PROJECTION = hashMapOf<ProjectionProperties, String>(
+val ARTIST_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.Artists._ID,
     ProjectionProperties.ARTIST to MediaStore.Audio.Artists.ARTIST,
     ProjectionProperties.ARTIST_KEY to MediaStore.Audio.Artists.ARTIST_KEY,
     ProjectionProperties.NUM_OF_ALBUMS to MediaStore.Audio.Artists.NUMBER_OF_ALBUMS,
     ProjectionProperties.NUM_OF_TRACKS to MediaStore.Audio.Artists.NUMBER_OF_TRACKS
 )
-val SONG_SEARCH_PROJECTION = hashMapOf<ProjectionProperties, String>(
+val SONG_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.AudioColumns._ID,
     ProjectionProperties.TITLE to MediaStore.Audio.AudioColumns.TITLE,
     ProjectionProperties.ALBUM to MediaStore.Audio.AudioColumns.ALBUM,
@@ -64,9 +64,13 @@ fun createLibrary(context: Context, modelName: String): ArrayList<BaseInfoModel>
                 ArtistModel::class.simpleName -> {
                     cursor.createArtistModel()
                 }
-                else -> throw IllegalArgumentException()
+                else -> {
+                    cursor.close()
+                    throw IllegalArgumentException()
+                }
             })
         }
+        cursor.close()
         return returnList
     }
     return null
