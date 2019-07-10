@@ -8,7 +8,8 @@ import com.application.mvvmmusicplayer.models.ArtistModel
 import com.application.mvvmmusicplayer.models.SongModel
 
 
-class LibraryManager(private val context: Context) {
+@Suppress("UNCHECKED_CAST")
+class LibraryManager (private val context: Context) {
     private val mediaStore = MediaStore()
     private val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
