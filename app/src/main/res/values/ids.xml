@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Main Activity Region-->
+    <item type="id" name="mainContainer"/>
+    <item type="id" name="mainAppBarLayout"/>
+    <item type="id" name="mainToolbar"/>
+    <!--End of Main Activity Region-->
+
+    <!--Home Fragment Region-->
+    <item type="id" name="homeFragmentSongListView"/>
+    <!--End of Home Fragment Region-->
+
+</resources>
