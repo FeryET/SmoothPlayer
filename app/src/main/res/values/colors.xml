@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!--DARK COLORS-->
+    <color name="appBlue">#068894</color>
+    <color name="appGreen">#00AE62</color>
+    <color name="appYellow">#F5AF3A</color>
+    <color name="appOrange">#F0652B</color>
+    <color name="appBlack">#282828</color>
+    <color name="appWhite">#DFEFFF</color>
 </resources>
