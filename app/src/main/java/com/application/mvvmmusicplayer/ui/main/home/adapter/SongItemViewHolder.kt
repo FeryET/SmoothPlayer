@@ -22,9 +22,6 @@ class MusicItemViewHolder(viewGroup: ViewGroup) : BaseMusicInfoViewHolder(viewGr
     @BindView(R.id.musicItemViewHolder_albumImageView)
     lateinit var albumArtImageView: CircularImageView
 
-    @BindView(R.id.musicItemViewHolder_albumImageView_Placeholder)
-    lateinit var albumArtPlaceHolder: ImageView
-
     init {
         ButterKnife.bind(viewGroup)
     }

@@ -12,7 +12,6 @@
 
     <!--MusicItemViewHolder region -->
     <item name="musicItemViewHolder_albumImageView" type="id"/>
-    <item name="musicItemViewHolder_albumImageView_Placeholder" type="id"/>
     <item name="musicItemViewHolder_songNameTextView" type="id"/>
     <item name="musicItemViewHolder_artistNameTextView" type="id"/>
     <!--End of MusicItemViewHolder region -->
