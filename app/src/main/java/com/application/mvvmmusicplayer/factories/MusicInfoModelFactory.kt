@@ -11,7 +11,7 @@ import com.application.mvvmmusicplayer.utils.getData
 import java.lang.IllegalArgumentException
 
 
-private enum class ProjectionProperties{
+enum class ProjectionProperties{
     ID, ALBUM, ARTIST, ALBUM_ART, YEAR,
     NUM_OF_SONGS, NUM_OF_ALBUMS, NUM_OF_TRACKS,
     ALBUM_ID, ARTIST_ID, DATA, ARTIST_KEY,

@@ -12,6 +12,7 @@ abstract class BaseMusicInfoListAdapter<P : BaseInfoModel, T : BaseMusicInfoView
     fun setData(array: ArrayList<P>) {
         dataList.clear()
         dataList.addAll(array)
+        notifyDataSetChanged()
     }
 
     fun resetData() {
@@ -20,5 +21,6 @@ abstract class BaseMusicInfoListAdapter<P : BaseInfoModel, T : BaseMusicInfoView
 
     fun addData(item: P) {
         dataList.add(item)
+        notifyItemInserted(dataList.size-1)
     }
 }
