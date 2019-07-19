@@ -1,17 +1,24 @@
 package com.application.mvvmmusicplayer.ui.main
 
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
-import androidx.viewpager.widget.ViewPager
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import butterknife.BindView
+import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
+import com.application.mvvmmusicplayer.di.application.AppComponent
+import com.application.mvvmmusicplayer.ui.main.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
+
+    @BindView(R.id.mainContainer)
+    lateinit var container: FrameLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        ButterKnife.bind(this)
+        supportFragmentManager.beginTransaction().
+            add(R.id.mainContainer, HomeFragment()).commit()
     }
 }
