@@ -1,5 +1,6 @@
 package com.application.mvvmmusicplayer.ui.main.home
 
+import android.app.AppComponentFactory
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
+import com.application.mvvmmusicplayer.di.application.AppComponent
 import com.application.mvvmmusicplayer.ui.main.home.adapter.SongListAdapter
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModel
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModelFactory
 import javax.inject.Inject
 
-class HomeFragment: Fragment() {
+class HomeFragment @Inject constructor(): Fragment() {
 
     @BindView(R.id.homeFragmentSongListView)
     lateinit var songListView: RecyclerView

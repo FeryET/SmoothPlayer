@@ -7,7 +7,7 @@ import javax.inject.Provider
 
 class HomeViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>,
-            Provider<ViewModel>>
+            @JvmSuppressWildcards Provider<ViewModel>>
 ): ViewModelProvider.Factory{
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
