@@ -23,6 +23,12 @@ import com.application.mvvmmusicplayer.di.viewmodel.ViewModelComponent
 import com.application.mvvmmusicplayer.ui.main.home.adapter.SongListAdapter
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModel
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModelFactory
+import com.application.mvvmmusicplayer.utils.requestForASinglePermission
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor(): Fragment() {
@@ -50,6 +56,7 @@ class HomeFragment @Inject constructor(): Fragment() {
             .appComponent((activity?.application as MVVMMusicPlayerApplication).appComponent).
                 build().inject(this)
         super.onViewCreated(view, savedInstanceState)
+        getStoragePermissionAndContinue()
     }
 
     override fun onResume() {
@@ -58,5 +65,37 @@ class HomeFragment @Inject constructor(): Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun getStoragePermissionAndContinue(){
+        activity?.let {
+            requestForASinglePermission(it,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                object: PermissionListener{
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    showMusicList()
+                }
+                override fun onPermissionRationaleShouldBeShown(
+                    permission: PermissionRequest?,
+                    token: PermissionToken?
+                ) {
+                    Log.d(TAG, "PermissionRationale")
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                    Log.d(TAG, "PermissionDenied")
+                }
+            })
+
+        }
+    }
+    private fun showMusicList(){
+        songListAdapter = context?.let { SongListAdapter(it) }
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
+        viewModel.getSongs().observe(this, Observer {songs ->
+            songs?.let {
+                songListAdapter?.setData(it)
+            }
+        })
     }
 }
