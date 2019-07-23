@@ -6,16 +6,30 @@ import androidx.appcompat.app.AppCompatActivity
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
-import com.application.mvvmmusicplayer.di.application.AppComponent
+import com.application.mvvmmusicplayer.base.MVVMMusicPlayerApplication
+import com.application.mvvmmusicplayer.datamanagers.LibraryManager
+import com.application.mvvmmusicplayer.di.application.AppModule
+import com.application.mvvmmusicplayer.di.application.DaggerAppComponent
+import com.application.mvvmmusicplayer.repositories.SongsRepository
 import com.application.mvvmmusicplayer.ui.main.home.HomeFragment
+import dagger.android.DaggerApplication
+import dagger.android.DaggerContentProvider
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     @BindView(R.id.mainContainer)
     lateinit var container: FrameLayout
 
+    @Inject
+    lateinit var repository: SongsRepository
+
+    @Inject
+    lateinit var libraryManager: LibraryManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (application as MVVMMusicPlayerApplication).appComponent.inject(this)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         supportFragmentManager.beginTransaction().

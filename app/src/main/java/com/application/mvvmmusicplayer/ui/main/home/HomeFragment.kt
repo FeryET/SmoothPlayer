@@ -1,8 +1,10 @@
 package com.application.mvvmmusicplayer.ui.main.home
 
+import android.Manifest
 import android.app.AppComponentFactory
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
+import com.application.mvvmmusicplayer.base.MVVMMusicPlayerApplication
 import com.application.mvvmmusicplayer.di.application.AppComponent
+import com.application.mvvmmusicplayer.di.application.DaggerAppComponent
+import com.application.mvvmmusicplayer.di.viewmodel.DaggerViewModelComponent
+import com.application.mvvmmusicplayer.di.viewmodel.ViewModelComponent
 import com.application.mvvmmusicplayer.ui.main.home.adapter.SongListAdapter
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModel
 import com.application.mvvmmusicplayer.ui.main.home.viewmodel.HomeViewModelFactory
@@ -21,6 +27,7 @@ import javax.inject.Inject
 
 class HomeFragment @Inject constructor(): Fragment() {
 
+    private val TAG: String = HomeFragment::class.java.simpleName
     @BindView(R.id.homeFragmentSongListView)
     lateinit var songListView: RecyclerView
 
@@ -39,13 +46,9 @@ class HomeFragment @Inject constructor(): Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         ButterKnife.bind(view)
-        songListAdapter = context?.let { SongListAdapter(it) }
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-        viewModel.getSongs().observe(this, Observer {songs ->
-            songs?.let {
-                songListAdapter?.setData(it)
-            }
-        })
+        DaggerViewModelComponent.builder()
+            .appComponent((activity?.application as MVVMMusicPlayerApplication).appComponent).
+                build().inject(this)
         super.onViewCreated(view, savedInstanceState)
     }
 
