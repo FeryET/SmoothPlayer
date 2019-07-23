@@ -18,7 +18,7 @@ import javax.inject.Provider
 import kotlin.reflect.KClass
 
 @Module
-public class ViewModelModule {
+class ViewModelModule {
 
     @Target(
         AnnotationTarget.FUNCTION,

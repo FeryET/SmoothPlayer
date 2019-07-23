@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class])
-public interface AppComponent {
+interface AppComponent {
     fun songRepository(): SongsRepository
     fun libraryManager(): LibraryManager
     fun inject(mainActivity: MainActivity)
