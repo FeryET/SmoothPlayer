@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">MVVMMusicPlayer</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="mainToolbar_title">This is a sample music player app.</string>
 </resources>

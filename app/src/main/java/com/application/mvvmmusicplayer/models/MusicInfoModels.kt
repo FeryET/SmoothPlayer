@@ -11,7 +11,7 @@ abstract class BaseInfoModel: Parcelable
 @Entity(tableName = "songs")
 data class SongModel(
     @PrimaryKey val id: Int,
-    val name: String,
+    val songTitle: String,
     val Location: String,
     val ArtistName: String,
     val AlbumName: String,

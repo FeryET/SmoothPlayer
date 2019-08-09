@@ -17,7 +17,7 @@ enum class ProjectionProperties{
     ALBUM_ID, ARTIST_ID, DATA, ARTIST_KEY,
     TITLE
 }
-val ALBUM_SEARCH_PROJECTION = hashMapOf(
+private val ALBUM_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.Albums._ID,
     ProjectionProperties.ALBUM to MediaStore.Audio.Albums.ALBUM,
     ProjectionProperties.ARTIST to MediaStore.Audio.Albums.ARTIST,
@@ -26,14 +26,14 @@ val ALBUM_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.NUM_OF_SONGS to MediaStore.Audio.Albums.NUMBER_OF_SONGS
 )
 
-val ARTIST_SEARCH_PROJECTION = hashMapOf(
+private val ARTIST_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.Artists._ID,
     ProjectionProperties.ARTIST to MediaStore.Audio.Artists.ARTIST,
     ProjectionProperties.ARTIST_KEY to MediaStore.Audio.Artists.ARTIST_KEY,
     ProjectionProperties.NUM_OF_ALBUMS to MediaStore.Audio.Artists.NUMBER_OF_ALBUMS,
     ProjectionProperties.NUM_OF_TRACKS to MediaStore.Audio.Artists.NUMBER_OF_TRACKS
 )
-val SONG_SEARCH_PROJECTION = hashMapOf(
+private val SONG_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.AudioColumns._ID,
     ProjectionProperties.TITLE to MediaStore.Audio.AudioColumns.TITLE,
     ProjectionProperties.ALBUM to MediaStore.Audio.AudioColumns.ALBUM,
@@ -42,8 +42,9 @@ val SONG_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ARTIST_ID to MediaStore.Audio.AudioColumns.ARTIST_ID,
     ProjectionProperties.DATA to MediaStore.Audio.AudioColumns.DATA
 )
-const val selection = MediaStore.Audio.Media.IS_MUSIC
-const val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
+
+private const val selection = MediaStore.Audio.Media.IS_MUSIC
+private const val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
 
 private val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
@@ -53,7 +54,7 @@ fun createLibrary(context: Context, modelName: String): ArrayList<BaseInfoModel>
             selection, null, sortOrder)
     cursor?.apply {
         val returnList = ArrayList<BaseInfoModel>()
-        while(!isAfterLast){
+        while(moveToNext()){
             returnList.add(when(modelName){
                 SongModel::class.simpleName -> {
                     cursor.createSongModel()
