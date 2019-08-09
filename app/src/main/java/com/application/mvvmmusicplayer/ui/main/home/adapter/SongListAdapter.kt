@@ -11,15 +11,9 @@ class SongListAdapter(context: Context) : BaseMusicInfoListAdapter<SongModel, Mu
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicItemViewHolder {
         return MusicItemViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.music_item_view_holder, parent, false) as ViewGroup
+            LayoutInflater.from(parent.context).inflate(R.layout.music_item_view_holder,
+                parent,
+                false) as ViewGroup
         )
-    }
-
-    override fun getItemCount(): Int {
-        return dataList.size
-    }
-
-    override fun onBindViewHolder(holder: MusicItemViewHolder, position: Int) {
-        holder.bindData(context, dataList[position])
     }
 }

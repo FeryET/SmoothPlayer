@@ -8,17 +8,13 @@ import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
 import com.application.mvvmmusicplayer.base.MVVMMusicPlayerApplication
 import com.application.mvvmmusicplayer.datamanagers.LibraryManager
-import com.application.mvvmmusicplayer.di.application.AppModule
-import com.application.mvvmmusicplayer.di.application.DaggerAppComponent
 import com.application.mvvmmusicplayer.repositories.SongsRepository
 import com.application.mvvmmusicplayer.ui.main.home.HomeFragment
-import dagger.android.DaggerApplication
-import dagger.android.DaggerContentProvider
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
-    @BindView(R.id.mainContainer)
+    @BindView(R.id.main_container)
     lateinit var container: FrameLayout
 
     @Inject
@@ -33,6 +29,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
         supportFragmentManager.beginTransaction().
-            add(R.id.mainContainer, HomeFragment()).commit()
+            add(R.id.main_container, HomeFragment()).commit()
     }
 }

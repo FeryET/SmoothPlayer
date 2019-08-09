@@ -4,31 +4,21 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import butterknife.BindView
-import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
 import com.application.mvvmmusicplayer.models.BaseInfoModel
 import com.application.mvvmmusicplayer.models.SongModel
 import com.application.mvvmmusicplayer.ui.main.base.musicinfoviews.BaseMusicInfoViewHolder
 import com.bumptech.glide.Glide
-import com.mikhaellopez.circularimageview.CircularImageView
+import kotlinx.android.synthetic.main.music_item_view_holder.*
+import kotlinx.android.synthetic.main.music_item_view_holder.view.*
 
 private const val ALBUM_ART_SIZE_MULTIPLIER = 0.35f
 class MusicItemViewHolder(viewGroup: ViewGroup) : BaseMusicInfoViewHolder(viewGroup) {
 
+    private val albumArtImageView: ImageView = viewGroup.albumImageView
+    private val artistNameTextView: TextView = viewGroup.artistNameTextView
+    private val songNameTextView: TextView = viewGroup.songNameTextView
 
-    @BindView(R.id.musicItemViewHolder_songNameTextView)
-    lateinit var songNameTextView: TextView
-
-    @BindView(R.id.musicItemViewHolder_artistNameTextView)
-    lateinit var artistNameTextView: TextView
-
-    @BindView(R.id.musicItemViewHolder_albumImageView)
-    lateinit var albumArtImageView: CircularImageView
-
-    init {
-        ButterKnife.bind(viewGroup)
-    }
     override fun bindData(context: Context, baseInfoModel: BaseInfoModel) {
         (baseInfoModel as SongModel).let { model ->
             artistNameTextView.text = model.ArtistName

@@ -7,12 +7,12 @@
         android:layout_height="match_parent" android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@id/mainAppBarLayout"
+            android:id="@+id/main_appbar_layout"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-        <Toolbar android:id="@id/mainToolbar"
+        <Toolbar android:id="@+id/main_toolbar"
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
                  style="@style/Widget.AppCompat.Toolbar"
@@ -21,7 +21,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
-            android:id="@id/mainContainer"
+            android:id="@+id/main_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
