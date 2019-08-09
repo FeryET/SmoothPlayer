@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -34,7 +35,8 @@ import javax.inject.Inject
 class HomeFragment @Inject constructor(): Fragment() {
 
     private val TAG: String = HomeFragment::class.java.simpleName
-    @BindView(R.id.homeFragmentSongListView)
+
+    @BindView(R.id.home_main_item_list_recycler_view)
     lateinit var songListView: RecyclerView
 
     @Inject
@@ -44,18 +46,20 @@ class HomeFragment @Inject constructor(): Fragment() {
     private lateinit var viewModel: HomeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.home_fragment_layout, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        ButterKnife.bind(view)
         DaggerViewModelComponent.builder()
             .appComponent((activity?.application as MVVMMusicPlayerApplication).appComponent).
                 build().inject(this)
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.home_fragment_layout, container, false)
+        ButterKnife.bind(this, view)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        songListView = activity?.findViewById(R.id.home_main_item_list_recycler_view)!!
         getStoragePermissionAndContinue()
     }
 
@@ -91,9 +95,11 @@ class HomeFragment @Inject constructor(): Fragment() {
     }
     private fun showMusicList(){
         songListAdapter = context?.let { SongListAdapter(it) }
+        songListView.adapter = songListAdapter
+        songListView.layoutManager = LinearLayoutManager(context)
         viewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
-        viewModel.getSongs().observe(this, Observer {songs ->
-            songs?.let {
+        viewModel.songs.observe(this, Observer {songList ->
+            songList?.let {
                 songListAdapter?.setData(it)
             }
         })

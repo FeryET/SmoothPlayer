@@ -6,13 +6,20 @@ import com.application.mvvmmusicplayer.datamanagers.LibraryManager
 import com.application.mvvmmusicplayer.models.SongModel
 
 class SongsRepository(private val libraryManager: LibraryManager) {
-    fun getSongLibrary(): LiveData<ArrayList<SongModel>?>{
-        val liveData =  MutableLiveData<ArrayList<SongModel>?>()
-        liveData.value = libraryManager.songLibrary()
-        return MutableLiveData<ArrayList<SongModel>?>().apply {
-            value = libraryManager.songLibrary()
-        }
+    private val mutableSongLibrary: MutableLiveData<ArrayList<SongModel>?> = MutableLiveData()
+    val songLibrary: LiveData<ArrayList<SongModel>?> get() = mutableSongLibrary
+    private fun updateSongLibrary(){
+        mutableSongLibrary.postValue(libraryManager.songLibrary())
     }
+
+    init {
+        updateSongLibrary()
+    }
+//    fun getSongLibrary(): LiveData<ArrayList<SongModel>?>{
+//        return MutableLiveData<ArrayList<SongModel>?>().apply {
+//            value = libraryManager.songLibrary()
+//        }
+//    }
 
 
 }

@@ -8,14 +8,5 @@ import com.application.mvvmmusicplayer.repositories.SongsRepository
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val songsRepository: SongsRepository): ViewModel() {
-
-    fun getSongs(): LiveData<ArrayList<SongModel>?> {
-        return songs
-    }
-
-    private val songs: MutableLiveData<ArrayList<SongModel>> by lazy {
-        MutableLiveData<ArrayList<SongModel>>().also{
-            songsRepository.getSongLibrary()
-        }
-    }
+    val songs: LiveData<ArrayList<SongModel>?> = songsRepository.songLibrary
 }
