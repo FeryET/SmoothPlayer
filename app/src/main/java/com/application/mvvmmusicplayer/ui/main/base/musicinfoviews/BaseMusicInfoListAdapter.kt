@@ -23,4 +23,12 @@ abstract class BaseMusicInfoListAdapter<P : BaseInfoModel, T : BaseMusicInfoView
         dataList.add(item)
         notifyItemInserted(dataList.size-1)
     }
+
+    override fun onBindViewHolder(holder: T, position: Int) {
+        holder.bindData(context, dataList[position])
+    }
+
+    override fun getItemCount(): Int {
+        return dataList.size
+    }
 }
