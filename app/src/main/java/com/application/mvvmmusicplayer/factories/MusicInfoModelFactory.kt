@@ -54,7 +54,7 @@ fun createLibrary(context: Context, modelName: String): ArrayList<BaseInfoModel>
             selection, null, sortOrder)
     cursor?.apply {
         val returnList = ArrayList<BaseInfoModel>()
-        while(!isAfterLast){
+        while(moveToNext()){
             returnList.add(when(modelName){
                 SongModel::class.simpleName -> {
                     cursor.createSongModel()
