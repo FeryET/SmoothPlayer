@@ -1,11 +1,11 @@
-package com.application.mvvmmusicplayer.ui.main.home.viewmodel
+package com.application.mvvmmusicplayer.ui.base.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import javax.inject.Inject
 import javax.inject.Provider
 
-class HomeViewModelFactory @Inject constructor(
+class ViewModelFactory @Inject constructor(
     private val creators: Map<Class<out ViewModel>,
             @JvmSuppressWildcards Provider<ViewModel>>
 ): ViewModelProvider.Factory{

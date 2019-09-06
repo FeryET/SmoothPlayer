@@ -1,6 +1,7 @@
 package com.application.mvvmmusicplayer.di.application
 
 import android.app.Application
+import com.application.mvvmmusicplayer.base.MVVMMusicPlayerApplication
 import com.application.mvvmmusicplayer.datamanagers.LibraryManager
 import com.application.mvvmmusicplayer.repositories.SongsRepository
 import dagger.Module
@@ -8,15 +9,10 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-public class AppModule(val application: Application){
+public class AppModule{
 
     @Provides @Singleton
-    fun providesApplication(): Application{
-        return application
-    }
-
-    @Provides @Singleton
-    fun providesLibraryManager(): LibraryManager {
+    fun providesLibraryManager(application: MVVMMusicPlayerApplication): LibraryManager {
         return LibraryManager(application)
     }
 

@@ -1,4 +1,4 @@
-package com.application.mvvmmusicplayer.ui.main.home.adapter
+package com.application.mvvmmusicplayer.ui.main.fragments.home.adapter
 
 import android.content.Context
 import android.view.ViewGroup
@@ -7,9 +7,8 @@ import android.widget.TextView
 import com.application.mvvmmusicplayer.R
 import com.application.mvvmmusicplayer.models.BaseInfoModel
 import com.application.mvvmmusicplayer.models.SongModel
-import com.application.mvvmmusicplayer.ui.main.base.musicinfoviews.BaseMusicInfoViewHolder
+import com.application.mvvmmusicplayer.ui.base.musicinfoviews.BaseMusicInfoViewHolder
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.music_item_view_holder.*
 import kotlinx.android.synthetic.main.music_item_view_holder.view.*
 
 private const val ALBUM_ART_SIZE_MULTIPLIER = 0.35f

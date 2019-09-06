@@ -1,7 +1,6 @@
-package com.application.mvvmmusicplayer.ui.main.home.viewmodel
+package com.application.mvvmmusicplayer.ui.main.fragments.home.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.application.mvvmmusicplayer.models.SongModel
 import com.application.mvvmmusicplayer.repositories.SongsRepository

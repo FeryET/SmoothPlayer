@@ -1,4 +1,4 @@
-package com.application.mvvmmusicplayer.ui.main.base.musicinfoviews
+package com.application.mvvmmusicplayer.ui.base.musicinfoviews
 
 import android.content.Context
 import android.view.ViewGroup
