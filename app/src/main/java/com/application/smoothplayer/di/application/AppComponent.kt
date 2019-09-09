@@ -1,10 +1,11 @@
 package com.application.smoothplayer.di.application
 
 import android.app.Application
-import com.application.smoothplayer.base.MVVMMusicPlayerApplication
+import com.application.smoothplayer.base.SmoothPlayerApplication
 import com.application.smoothplayer.datamanagers.LibraryManager
 import com.application.smoothplayer.di.activity.ActivityBindingModule
 import com.application.smoothplayer.di.fragment.FragmentBindingModule
+import com.application.smoothplayer.player.PlayerEntitiesProvider
 import com.application.smoothplayer.repositories.SongsRepository
 import dagger.BindsInstance
 import dagger.Component
@@ -21,7 +22,7 @@ import javax.inject.Singleton
         FragmentBindingModule::class
     ]
 )
-interface AppComponent : AndroidInjector<MVVMMusicPlayerApplication> {
+interface AppComponent : AndroidInjector<SmoothPlayerApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance
@@ -32,4 +33,5 @@ interface AppComponent : AndroidInjector<MVVMMusicPlayerApplication> {
 
     fun songRepository(): SongsRepository
     fun libraryManager(): LibraryManager
+    fun playerEntitiesProvider(): PlayerEntitiesProvider
 }

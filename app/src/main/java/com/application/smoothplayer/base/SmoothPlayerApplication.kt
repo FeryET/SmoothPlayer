@@ -7,7 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import javax.inject.Inject
 
-class MVVMMusicPlayerApplication @Inject constructor() : DaggerApplication() {
+class SmoothPlayerApplication @Inject constructor() : DaggerApplication() {
     companion object{
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
