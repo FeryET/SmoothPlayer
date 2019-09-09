@@ -8,7 +8,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class PlayerBarFragment @Inject constructor() : DaggerFragment() {
-    private val TAG = this.javaClass.simpleName
+    companion object{
+        private const val TAG = "PlayerBarFragment"
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory

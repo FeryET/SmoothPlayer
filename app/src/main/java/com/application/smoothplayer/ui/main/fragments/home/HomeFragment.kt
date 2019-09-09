@@ -27,9 +27,9 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class HomeFragment @Inject constructor() : DaggerFragment() {
-
-    private val TAG: String = HomeFragment::class.java.simpleName
-
+    companion object {
+        private const val TAG: String = "HomeFragment"
+    }
     @BindView(R.id.home_main_item_list_recycler_view)
     lateinit var songListView: RecyclerView
 
