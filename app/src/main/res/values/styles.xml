@@ -28,4 +28,23 @@
         </item>
     </style>
 
+    <style name="player_bar_image_button">
+        <item name="android:layout_width">
+            @dimen/player_bar_buttons_dimensions
+        </item>
+        <item name="android:layout_height">
+            @dimen/player_bar_buttons_dimensions
+        </item>
+        <item name="android:layout_margin">
+            @dimen/player_bar_buttons_margins
+        </item>
+        <item name="android:layout_gravity">
+            center
+        </item>
+        <item name="android:background">
+            @null
+        </item>
+    </style>
+
+    <dimen name="player_bar_buttons_margins">4dp</dimen>
 </resources>

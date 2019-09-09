@@ -30,6 +30,7 @@ class HomeFragment @Inject constructor() : DaggerFragment() {
     companion object {
         private const val TAG: String = "HomeFragment"
     }
+
     @BindView(R.id.home_main_item_list_recycler_view)
     lateinit var songListView: RecyclerView
 
@@ -53,10 +54,11 @@ class HomeFragment @Inject constructor() : DaggerFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater
+        return inflater
             .inflate(R.layout.home_fragment_layout, container, false)
-        ButterKnife.bind(this, view)
-        return view
+            .also { view ->
+                ButterKnife.bind(this, view)
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

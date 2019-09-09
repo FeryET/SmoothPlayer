@@ -1,13 +1,27 @@
 package com.androidapplication.smoothplayer.ui.main.fragments.playerbar.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.androidapplication.smoothplayer.models.SongModel
+import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
+import javax.inject.Inject
 
-class PlayerBarViewModel : ViewModel(){
-    private val currentSong: LiveData<SongModel> = MutableLiveData<SongModel>()
-    private
+class PlayerBarViewModel : ViewModel() {
+    @Inject
+    private lateinit var playerEntitiesProvider: PlayerEntitiesProvider
 
-    fun prepareSong(){}
+    fun playNewSong(songModel: SongModel) {
+        playerEntitiesProvider.apply {
+            player.prepare(
+                mediaSourceFactory.createMediaSource(Uri.parse(songModel.Location))
+            )
+            player.playWhenReady = true
+        }
+    }
+    fun pausePlaying(){
+        playerEntitiesProvider.player.playWhenReady = false
+    }
+    fun stopPlaying(){
+        playerEntitiesProvider.player.stop(false)
+    }
 }
