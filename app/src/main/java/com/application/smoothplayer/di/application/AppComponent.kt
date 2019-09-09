@@ -21,7 +21,7 @@ import javax.inject.Singleton
         FragmentBindingModule::class
     ]
 )
-public interface AppComponent : AndroidInjector<MVVMMusicPlayerApplication> {
+interface AppComponent : AndroidInjector<MVVMMusicPlayerApplication> {
     @Component.Builder
     interface Builder {
         @BindsInstance

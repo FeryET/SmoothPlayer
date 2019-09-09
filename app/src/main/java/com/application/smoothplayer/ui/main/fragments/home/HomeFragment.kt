@@ -41,16 +41,20 @@ class HomeFragment @Inject constructor() : DaggerFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel = ViewModelProviders.of(this,
-                                          viewModelFactory)[HomeViewModel::class.java]
+        viewModel = ViewModelProviders.of(
+            this,
+            viewModelFactory
+        )[HomeViewModel::class.java]
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater
-                .inflate(R.layout.home_fragment_layout, container, false)
+            .inflate(R.layout.home_fragment_layout, container, false)
         ButterKnife.bind(this, view)
         return view
     }
@@ -58,34 +62,35 @@ class HomeFragment @Inject constructor() : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         songListView =
-                activity?.findViewById(R.id.home_main_item_list_recycler_view)!!
+            activity?.findViewById(R.id.home_main_item_list_recycler_view)!!
         getStoragePermissionAndContinue()
     }
 
     private fun getStoragePermissionAndContinue() {
         activity?.let {
-            requestForASinglePermission(it,
-                                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                                        object : PermissionListener {
-                                            override fun onPermissionGranted(
-                                                    response: PermissionGrantedResponse?) {
-                                                showSongs()
-                                            }
+            requestForASinglePermission(
+                it,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                object : PermissionListener {
+                    override fun onPermissionGranted(
+                        response: PermissionGrantedResponse?
+                    ) {
+                        showSongs()
+                    }
 
-                                            override fun onPermissionRationaleShouldBeShown(
-                                                    permission: PermissionRequest?,
-                                                    token: PermissionToken?) {
-                                                Log
-                                                        .d(TAG,
-                                                           "PermissionRationale")
-                                            }
+                    override fun onPermissionRationaleShouldBeShown(
+                        permission: PermissionRequest?,
+                        token: PermissionToken?
+                    ) {
+                        Log.d(TAG, "PermissionRationale")
+                    }
 
-                                            override fun onPermissionDenied(
-                                                    response: PermissionDeniedResponse?) {
-                                                Log.d(TAG, "PermissionDenied")
-                                            }
-                                        })
-
+                    override fun onPermissionDenied(
+                        response: PermissionDeniedResponse?
+                    ) {
+                        Log.d(TAG, "PermissionDenied")
+                    }
+                })
         }
     }
 
