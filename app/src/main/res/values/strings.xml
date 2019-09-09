@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">MVVMMusicPlayer</string>
+    <string name="app_name">Smooth Player</string>
     <string name="mainToolbar_title">This is a sample music player app.</string>
 </resources>

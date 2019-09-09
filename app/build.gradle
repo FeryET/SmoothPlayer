@@ -17,7 +17,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId "com.application.mvvmmusicplayer"
+        applicationId "com.application.smoothplayer"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
