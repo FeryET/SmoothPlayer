@@ -9,7 +9,7 @@ fun requestForASinglePermission(
     activity: Activity,
     permission: String,
     permissionListener: PermissionListener
-){
+) {
     Dexter.withActivity(activity)
         .withPermission(permission)
         .withListener(permissionListener)

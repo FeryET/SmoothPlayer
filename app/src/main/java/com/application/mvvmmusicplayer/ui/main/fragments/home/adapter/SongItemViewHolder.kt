@@ -12,7 +12,9 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.music_item_view_holder.view.*
 
 private const val ALBUM_ART_SIZE_MULTIPLIER = 0.35f
-class MusicItemViewHolder(viewGroup: ViewGroup) : BaseMusicInfoViewHolder(viewGroup) {
+
+class MusicItemViewHolder(viewGroup: ViewGroup) :
+    BaseMusicInfoViewHolder(viewGroup) {
 
     private val albumArtImageView: ImageView = viewGroup.albumImageView
     private val artistNameTextView: TextView = viewGroup.artistNameTextView
@@ -22,10 +24,10 @@ class MusicItemViewHolder(viewGroup: ViewGroup) : BaseMusicInfoViewHolder(viewGr
         (baseInfoModel as SongModel).let { model ->
             artistNameTextView.text = model.ArtistName
             songNameTextView.text = model.songTitle
-            Glide.with(context).load(model.ArtWorkLocation).
-                placeholder(R.drawable.ic_music_note_black_24dp).
-                thumbnail(ALBUM_ART_SIZE_MULTIPLIER).fitCenter().
-                into(albumArtImageView)
+            Glide.with(context).load(model.ArtWorkLocation)
+                .placeholder(R.drawable.ic_music_note_black_24dp)
+                .thumbnail(ALBUM_ART_SIZE_MULTIPLIER).fitCenter()
+                .into(albumArtImageView)
         }
     }
 }

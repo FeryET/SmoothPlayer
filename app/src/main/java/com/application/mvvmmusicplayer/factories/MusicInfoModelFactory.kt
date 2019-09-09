@@ -8,15 +8,15 @@ import com.application.mvvmmusicplayer.models.ArtistModel
 import com.application.mvvmmusicplayer.models.BaseInfoModel
 import com.application.mvvmmusicplayer.models.SongModel
 import com.application.mvvmmusicplayer.utils.getData
-import java.lang.IllegalArgumentException
 
 
-enum class ProjectionProperties{
+enum class ProjectionProperties {
     ID, ALBUM, ARTIST, ALBUM_ART, YEAR,
     NUM_OF_SONGS, NUM_OF_ALBUMS, NUM_OF_TRACKS,
     ALBUM_ID, ARTIST_ID, DATA, ARTIST_KEY,
     TITLE
 }
+
 private val ALBUM_SEARCH_PROJECTION = hashMapOf(
     ProjectionProperties.ID to MediaStore.Audio.Albums._ID,
     ProjectionProperties.ALBUM to MediaStore.Audio.Albums.ALBUM,
@@ -48,28 +48,35 @@ private const val sortOrder = MediaStore.Audio.Media.TITLE + " ASC"
 
 private val uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
 
-fun createLibrary(context: Context, modelName: String): ArrayList<BaseInfoModel>?{
+fun createLibrary(
+    context: Context,
+    modelName: String
+): ArrayList<BaseInfoModel>? {
     val cursor = context.contentResolver
-        .query(uri, specificProjectionOfModelType(modelName),
-            selection, null, sortOrder)
+        .query(
+            uri, specificProjectionOfModelType(modelName),
+            selection, null, sortOrder
+        )
     cursor?.apply {
         val returnList = ArrayList<BaseInfoModel>()
-        while(moveToNext()){
-            returnList.add(when(modelName){
-                SongModel::class.simpleName -> {
-                    cursor.createSongModel()
+        while (moveToNext()) {
+            returnList.add(
+                when (modelName) {
+                    SongModel::class.simpleName -> {
+                        cursor.createSongModel()
+                    }
+                    AlbumModel::class.simpleName -> {
+                        cursor.createAlbumModel()
+                    }
+                    ArtistModel::class.simpleName -> {
+                        cursor.createArtistModel()
+                    }
+                    else -> {
+                        cursor.close()
+                        throw IllegalArgumentException()
+                    }
                 }
-                AlbumModel::class.simpleName -> {
-                    cursor.createAlbumModel()
-                }
-                ArtistModel::class.simpleName -> {
-                    cursor.createArtistModel()
-                }
-                else -> {
-                    cursor.close()
-                    throw IllegalArgumentException()
-                }
-            })
+            )
         }
         cursor.close()
         return returnList
@@ -78,16 +85,21 @@ fun createLibrary(context: Context, modelName: String): ArrayList<BaseInfoModel>
 }
 
 private fun specificProjectionOfModelType(modelName: String): Array<String> {
-    return when(modelName) {
-        SongModel::class.simpleName -> {SONG_SEARCH_PROJECTION.values.toTypedArray()}
-        AlbumModel::class.simpleName -> { ALBUM_SEARCH_PROJECTION.values.toTypedArray()}
+    return when (modelName) {
+        SongModel::class.simpleName -> {
+            SONG_SEARCH_PROJECTION.values.toTypedArray()
+        }
+        AlbumModel::class.simpleName -> {
+            ALBUM_SEARCH_PROJECTION.values.toTypedArray()
+        }
         ArtistModel::class.simpleName -> {
-            ARTIST_SEARCH_PROJECTION.values.toTypedArray()}
+            ARTIST_SEARCH_PROJECTION.values.toTypedArray()
+        }
         else -> throw IllegalArgumentException()
     }
 }
 
-private fun Cursor.createSongModel(): SongModel{
+private fun Cursor.createSongModel(): SongModel {
     SONG_SEARCH_PROJECTION.also { map ->
         return SongModel(
             getData(ProjectionProperties.ID, map).toInt(),
@@ -100,21 +112,22 @@ private fun Cursor.createSongModel(): SongModel{
     }
 }
 
-private fun Cursor.createAlbumModel(): AlbumModel{
+private fun Cursor.createAlbumModel(): AlbumModel {
     ALBUM_SEARCH_PROJECTION.also { map ->
         return AlbumModel(
-            getData(ProjectionProperties.ALBUM,map),
-            getData(ProjectionProperties.ARTIST,map),
+            getData(ProjectionProperties.ALBUM, map),
+            getData(ProjectionProperties.ARTIST, map),
             getData(ProjectionProperties.ALBUM_ID, map),
             getData(ProjectionProperties.ALBUM_ART, map),
-            null)
+            null
+        )
     }
 }
 
-private fun Cursor.createArtistModel(): ArtistModel{
+private fun Cursor.createArtistModel(): ArtistModel {
     ARTIST_SEARCH_PROJECTION.also { map ->
         return ArtistModel(
-            getData(ProjectionProperties.ARTIST,map),
+            getData(ProjectionProperties.ARTIST, map),
             getData(ProjectionProperties.ARTIST_ID, map),
             null
         )

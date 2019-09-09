@@ -7,9 +7,13 @@ import com.application.mvvmmusicplayer.R
 import com.application.mvvmmusicplayer.models.SongModel
 import com.application.mvvmmusicplayer.ui.base.musicinfoviews.BaseMusicInfoListAdapter
 
-class SongListAdapter(context: Context) : BaseMusicInfoListAdapter<SongModel, MusicItemViewHolder>(context) {
+class SongListAdapter(context: Context) :
+    BaseMusicInfoListAdapter<SongModel, MusicItemViewHolder>(context) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MusicItemViewHolder {
         return MusicItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.music_item_view_holder,

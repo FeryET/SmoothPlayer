@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
-abstract class BaseInfoModel: Parcelable
+abstract class BaseInfoModel : Parcelable
 
 @Parcelize
 @Entity(tableName = "songs")
@@ -16,21 +16,25 @@ data class SongModel(
     val ArtistName: String,
     val AlbumName: String,
     val ArtWorkLocation: String?
-): BaseInfoModel()
+) : BaseInfoModel()
 
 @Parcelize
 @Entity(tableName = "albums")
-data class AlbumModel(@PrimaryKey val name: String,
-                      val artistName: String,
-                      val albumID: String,
-                      val albumArtPath: String,
-                      var songList: ArrayList<SongModel>?): BaseInfoModel()
+data class AlbumModel(
+    @PrimaryKey val name: String,
+    val artistName: String,
+    val albumID: String,
+    val albumArtPath: String,
+    var songList: ArrayList<SongModel>?
+) : BaseInfoModel()
 
 @Parcelize
 @Entity(tableName = "artists")
-data class ArtistModel(@PrimaryKey val Name: String,
-                       val artistID: String,
-                       var albumList: ArrayList<AlbumModel>?): BaseInfoModel()
+data class ArtistModel(
+    @PrimaryKey val Name: String,
+    val artistID: String,
+    var albumList: ArrayList<AlbumModel>?
+) : BaseInfoModel()
 
 
 

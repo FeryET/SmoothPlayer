@@ -1,7 +1,6 @@
 package com.application.mvvmmusicplayer.ui.base.musicinfoviews
 
 import android.content.Context
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.mvvmmusicplayer.models.BaseInfoModel
 
@@ -21,7 +20,7 @@ abstract class BaseMusicInfoListAdapter<P : BaseInfoModel, T : BaseMusicInfoView
 
     fun addData(item: P) {
         dataList.add(item)
-        notifyItemInserted(dataList.size-1)
+        notifyItemInserted(dataList.size - 1)
     }
 
     override fun onBindViewHolder(holder: T, position: Int) {
