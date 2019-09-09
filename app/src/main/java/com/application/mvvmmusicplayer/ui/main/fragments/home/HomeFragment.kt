@@ -1,13 +1,13 @@
 package com.application.mvvmmusicplayer.ui.main.fragments.home
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.application.mvvmmusicplayer.R
-import com.application.mvvmmusicplayer.base.MVVMMusicPlayerApplication
-import com.application.mvvmmusicplayer.di.application.DaggerAppComponent
 import com.application.mvvmmusicplayer.ui.base.viewmodel.ViewModelFactory
 import com.application.mvvmmusicplayer.ui.main.fragments.home.adapter.SongListAdapter
 import com.application.mvvmmusicplayer.ui.main.fragments.home.viewmodel.HomeViewModel
@@ -42,6 +40,11 @@ class HomeFragment @Inject constructor(): DaggerFragment() {
     private var songListAdapter: SongListAdapter? = null
     private lateinit var viewModel: HomeViewModel
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
+
+    }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_fragment_layout, container, false)
         ButterKnife.bind(this, view)
@@ -54,21 +57,13 @@ class HomeFragment @Inject constructor(): DaggerFragment() {
         getStoragePermissionAndContinue()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
     private fun getStoragePermissionAndContinue(){
         activity?.let {
             requestForASinglePermission(it,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 object: PermissionListener{
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    showMusicList()
+                    showSongs()
                 }
                 override fun onPermissionRationaleShouldBeShown(
                     permission: PermissionRequest?,
@@ -84,11 +79,10 @@ class HomeFragment @Inject constructor(): DaggerFragment() {
 
         }
     }
-    private fun showMusicList(){
+    private fun showSongs(){
         songListAdapter = context?.run { SongListAdapter(this) }
         songListView.adapter = songListAdapter
         songListView.layoutManager = LinearLayoutManager(context)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[HomeViewModel::class.java]
         viewModel.songs.observe(this, Observer {songList ->
             songList?.let {
                 songListAdapter?.setData(it)
