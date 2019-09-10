@@ -11,6 +11,7 @@ import com.androidapplication.smoothplayer.R
 import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
 import com.androidapplication.smoothplayer.ui.base.viewmodel.ViewModelFactory
 import com.androidapplication.smoothplayer.ui.main.fragments.playerbar.viewmodel.PlayerBarViewModel
+import com.bumptech.glide.Glide
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 import kotlinx.android.synthetic.main.player_bar_layout.*
@@ -53,34 +54,51 @@ class PlayerBarFragment @Inject constructor() : DaggerFragment() {
     }
 
     private fun setupClickListeners() {
-        player_bar_play_pause_current_song.setOnClickListener(object : View.OnClickListener{
-            private var currentState = PlayState.READY_TO_PLAY
+        player_bar_play_pause_current_song.setOnClickListener(object :
+            View.OnClickListener {
+            var currentState = PlayState.READY_TO_PLAY
             override fun onClick(v: View?) {
-                playerEntitiesProvider.player.playWhenReady = when(currentState){
-                    PlayState.READY_TO_PAUSE -> false
-                    PlayState.READY_TO_PLAY -> true
-                }.also {result ->
-                    currentState = if(result)
-                        PlayState.READY_TO_PAUSE
-                    else
-                        PlayState.READY_TO_PLAY
+                with(playerEntitiesProvider.player){
+                    currentState = PlayState.getStateOf(playWhenReady).init()
+                    playWhenReady = currentState.stateFlag
                 }
             }
         })
-        player_bar_next_track.setOnClickListener{
+
+        player_bar_next_track.setOnClickListener {
             playNextTrack()
         }
-        player_bar_previous_track.setOnClickListener{
+        player_bar_previous_track.setOnClickListener {
             playPreviousTrack()
         }
         player_bar_stop.setOnClickListener {
             playerEntitiesProvider.player.stop()
         }
     }
+    private fun playPreviousTrack() {
+        TODO("how playing mechanism should be handled.")
+    }
 
-    private fun playPreviousTrack() {}
+    private fun playNextTrack() {
+        TODO("how ")
 
-    private fun playNextTrack() {}
+    }
+
+    private fun PlayState.init(): PlayState {
+        when(this){
+            PlayState.READY_TO_PLAY -> {R.drawable.ic_play_arrow}
+            PlayState.READY_TO_PAUSE -> {R.drawable.ic_pause}
+        }.also {drawable ->
+            Glide.with(this@PlayerBarFragment).load(drawable).into(player_bar_album_artwork)
+        }
+        return this
+    }
 }
 
-private enum class PlayState {READY_TO_PLAY, READY_TO_PAUSE }
+
+private enum class PlayState(val stateFlag: Boolean) {
+    READY_TO_PLAY(true), READY_TO_PAUSE(false);
+    companion object{
+        fun getStateOf(boolean: Boolean) = PlayState.values().first{it.stateFlag == boolean}
+    }
+}
