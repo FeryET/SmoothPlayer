@@ -3,6 +3,8 @@ package com.androidapplication.smoothplayer.di.application
 import android.app.Application
 import com.androidapplication.smoothplayer.application.SmoothPlayerApplication
 import com.androidapplication.smoothplayer.datamanagers.LibraryManager
+import com.androidapplication.smoothplayer.player.GlobalPlayerEventListener
+import com.androidapplication.smoothplayer.player.PlayerController
 import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
 import com.androidapplication.smoothplayer.repositories.SongsRepository
 import dagger.Module
@@ -28,5 +30,23 @@ class AppModule {
     @Singleton
     fun providesPlayerEntitiesProvider(application: Application): PlayerEntitiesProvider {
         return PlayerEntitiesProvider(application)
+    }
+
+    @Provides
+    @Singleton
+    fun providesGlobalPlayerEventListener(): GlobalPlayerEventListener {
+        return GlobalPlayerEventListener()
+    }
+
+    @Provides
+    @Singleton
+    fun providesPlayerController(
+        playerEntitiesProvider: PlayerEntitiesProvider,
+        globalPlayerEventListener: GlobalPlayerEventListener
+    ): PlayerController {
+        return PlayerController(
+            playerEntitiesProvider,
+            globalPlayerEventListener
+        )
     }
 }
