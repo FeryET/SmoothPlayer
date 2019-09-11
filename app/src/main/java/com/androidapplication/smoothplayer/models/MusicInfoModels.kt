@@ -12,10 +12,10 @@ abstract class BaseInfoModel : Parcelable
 data class SongModel(
     @PrimaryKey val id: Int,
     val songTitle: String,
-    val Location: String,
-    val ArtistName: String,
-    val AlbumName: String,
-    val ArtWorkLocation: String?
+    val location: String,
+    val artistName: String,
+    val albumName: String,
+    val artWorkLocation: String?
 ) : BaseInfoModel()
 
 @Parcelize
@@ -31,7 +31,7 @@ data class AlbumModel(
 @Parcelize
 @Entity(tableName = "artists")
 data class ArtistModel(
-    @PrimaryKey val Name: String,
+    @PrimaryKey val name: String,
     val artistID: String,
     var albumList: ArrayList<AlbumModel>?
 ) : BaseInfoModel()

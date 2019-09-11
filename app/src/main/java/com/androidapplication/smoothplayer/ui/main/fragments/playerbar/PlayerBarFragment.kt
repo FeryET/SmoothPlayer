@@ -76,12 +76,11 @@ class PlayerBarFragment @Inject constructor() : DaggerFragment() {
         }
     }
     private fun playPreviousTrack() {
-        TODO("how playing mechanism should be handled.")
+        TODO("playing mechanism is not yet handled.")
     }
 
     private fun playNextTrack() {
-        TODO("how ")
-
+        TODO("playing mechanism is not yet handled.")
     }
 
     private fun PlayState.init(): PlayState {
@@ -99,6 +98,6 @@ class PlayerBarFragment @Inject constructor() : DaggerFragment() {
 private enum class PlayState(val stateFlag: Boolean) {
     READY_TO_PLAY(true), READY_TO_PAUSE(false);
     companion object{
-        fun getStateOf(boolean: Boolean) = PlayState.values().first{it.stateFlag == boolean}
+        fun getStateOf(boolean: Boolean) = values().first{it.stateFlag == boolean}
     }
 }

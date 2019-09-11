@@ -21,11 +21,12 @@ class MusicItemViewHolder(viewGroup: ViewGroup) :
     private val songNameTextView: TextView = viewGroup.songNameTextView
 
     override fun bindData(context: Context, baseInfoModel: BaseInfoModel) {
-        (baseInfoModel as SongModel).let { model ->
-            artistNameTextView.text = model.ArtistName
-            songNameTextView.text = model.songTitle
-            Glide.with(context).load(model.ArtWorkLocation)
+        with(baseInfoModel as SongModel) {
+            artistNameTextView.text = artistName
+            songNameTextView.text = songTitle
+            Glide.with(context).load(artWorkLocation)
                 .placeholder(R.drawable.ic_music_note_black_24dp)
+                .error(R.drawable.ic_music_note_black_24dp)
                 .thumbnail(ALBUM_ART_SIZE_MULTIPLIER).fitCenter()
                 .into(albumArtImageView)
         }

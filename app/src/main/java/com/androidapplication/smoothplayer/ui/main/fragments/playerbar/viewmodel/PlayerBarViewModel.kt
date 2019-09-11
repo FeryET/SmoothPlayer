@@ -13,7 +13,7 @@ class PlayerBarViewModel : ViewModel() {
     fun playNewSong(songModel: SongModel) {
         playerEntitiesProvider.apply {
             player.prepare(
-                mediaSourceFactory.createMediaSource(Uri.parse(songModel.Location))
+                mediaSourceFactory.createMediaSource(Uri.parse(songModel.location))
             )
             player.playWhenReady = true
         }
