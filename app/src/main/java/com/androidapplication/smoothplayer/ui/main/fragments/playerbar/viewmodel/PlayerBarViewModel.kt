@@ -7,8 +7,8 @@ import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
 import javax.inject.Inject
 
 class PlayerBarViewModel : ViewModel() {
-    @Inject
-    private lateinit var playerEntitiesProvider: PlayerEntitiesProvider
+
+    @Inject lateinit var playerEntitiesProvider: PlayerEntitiesProvider
 
     fun playNewSong(songModel: SongModel) {
         playerEntitiesProvider.apply {

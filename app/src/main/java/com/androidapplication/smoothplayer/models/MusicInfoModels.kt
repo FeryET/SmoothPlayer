@@ -15,7 +15,7 @@ data class SongModel(
     val location: String,
     val artistName: String,
     val albumName: String,
-    val artWorkLocation: String?
+    val artworkLocation: String?
 ) : BaseInfoModel()
 
 @Parcelize

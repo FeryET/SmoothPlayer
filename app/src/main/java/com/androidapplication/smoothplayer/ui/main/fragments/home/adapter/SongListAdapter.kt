@@ -1,18 +1,17 @@
 package com.androidapplication.smoothplayer.ui.main.fragments.home.adapter
 
 import android.content.Context
-import android.net.Uri
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.androidapplication.smoothplayer.R
 import com.androidapplication.smoothplayer.models.SongModel
-import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
+import com.androidapplication.smoothplayer.services.MusicPlayerCommands
+import com.androidapplication.smoothplayer.services.MusicPlayerService
+import com.androidapplication.smoothplayer.services.MusicServiceDataFlags
 import com.androidapplication.smoothplayer.ui.base.musicinfoviews.BaseMusicInfoListAdapter
 
-class SongListAdapter(
-    context: Context,
-    val playerEntitiesProvider: PlayerEntitiesProvider
-) :
+class SongListAdapter(context: Context) :
     BaseMusicInfoListAdapter<SongModel, MusicItemViewHolder>(context) {
 
     override fun onCreateViewHolder(
@@ -27,19 +26,17 @@ class SongListAdapter(
             ) as ViewGroup
         ).apply {
             itemView.setOnClickListener {
-                playMusic(adapterPosition)
+                sendToPlay(adapterPosition)
             }
         }
     }
 
-    private fun playMusic(adapterPosition: Int) {
-        with(playerEntitiesProvider) {
-            player.prepare(
-                mediaSourceFactory.createMediaSource(
-                    Uri.parse(dataList[adapterPosition].location)
-                )
-            )
-            player.playWhenReady = true
-        }
+    private fun sendToPlay(adapterPosition: Int) {
+        context.startService(
+            Intent(context, MusicPlayerService::class.java).apply {
+                action = MusicPlayerCommands.PLAY.name
+                putExtra(MusicServiceDataFlags.SONG_MODEL.name, dataList[adapterPosition])
+            }
+        )
     }
 }

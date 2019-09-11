@@ -24,7 +24,7 @@ class MusicItemViewHolder(viewGroup: ViewGroup) :
         with(baseInfoModel as SongModel) {
             artistNameTextView.text = artistName
             songNameTextView.text = songTitle
-            Glide.with(context).load(artWorkLocation)
+            Glide.with(context).load(artworkLocation)
                 .placeholder(R.drawable.ic_music_note_black_24dp)
                 .error(R.drawable.ic_music_note_black_24dp)
                 .thumbnail(ALBUM_ART_SIZE_MULTIPLIER).fitCenter()
