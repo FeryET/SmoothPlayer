@@ -1,6 +1,5 @@
 package com.androidapplication.smoothplayer.di.application
 
-import android.app.Application
 import com.androidapplication.smoothplayer.application.SmoothPlayerApplication
 import com.androidapplication.smoothplayer.datamanagers.LibraryManager
 import com.androidapplication.smoothplayer.di.activity.ActivityBindingModule
@@ -10,16 +9,15 @@ import com.androidapplication.smoothplayer.player.GlobalPlayerEventListener
 import com.androidapplication.smoothplayer.player.PlayerController
 import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
 import com.androidapplication.smoothplayer.repositories.SongsRepository
-import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
     modules = [
-        AndroidSupportInjectionModule::class,
+        AndroidInjectionModule::class,
         AppModule::class,
         ActivityBindingModule::class,
         FragmentBindingModule::class,
@@ -27,14 +25,8 @@ import javax.inject.Singleton
     ]
 )
 interface AppComponent : AndroidInjector<SmoothPlayerApplication> {
-    @Component.Builder
-    interface Builder {
-        @BindsInstance
-        fun create(app: Application): Builder
-
-        fun build(): AppComponent
-    }
-
+    @Component.Factory
+    interface Factory: AndroidInjector.Factory<SmoothPlayerApplication>
     fun songRepository(): SongsRepository
     fun libraryManager(): LibraryManager
     fun playerEntitiesProvider(): PlayerEntitiesProvider

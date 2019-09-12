@@ -10,6 +10,7 @@ import javax.inject.Inject
 
 class SmoothPlayerApplication @Inject constructor() : DaggerApplication() {
     companion object{
+        @JvmStatic
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
     }
@@ -21,6 +22,6 @@ class SmoothPlayerApplication @Inject constructor() : DaggerApplication() {
         context = this
     }
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this).build()
+        return DaggerAppComponent.factory().create(this)
     }
 }

@@ -1,52 +1,70 @@
 package com.androidapplication.smoothplayer.di.application
 
-import android.app.Application
+import android.content.Context
 import com.androidapplication.smoothplayer.application.SmoothPlayerApplication
 import com.androidapplication.smoothplayer.datamanagers.LibraryManager
+import com.androidapplication.smoothplayer.di.qualifiers.AppContext
 import com.androidapplication.smoothplayer.player.GlobalPlayerEventListener
 import com.androidapplication.smoothplayer.player.PlayerController
 import com.androidapplication.smoothplayer.player.PlayerEntitiesProvider
 import com.androidapplication.smoothplayer.repositories.SongsRepository
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.android.AndroidInjectionModule
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [ContextModule::class])
 class AppModule {
+    @Module
+    companion object {
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun providesLibraryManager(@AppContext context: Context): LibraryManager {
+            return LibraryManager(context)
+        }
 
-    @Provides
-    @Singleton
-    fun providesLibraryManager(application: SmoothPlayerApplication): LibraryManager {
-        return LibraryManager(application)
-    }
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun providesSongRepository(libraryManager: LibraryManager): SongsRepository {
+            return SongsRepository(libraryManager)
+        }
 
-    @Provides
-    @Singleton
-    fun providesSongRepository(libraryManager: LibraryManager): SongsRepository {
-        return SongsRepository(libraryManager)
-    }
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun providesPlayerEntitiesProvider(@AppContext context: Context): PlayerEntitiesProvider {
+            return PlayerEntitiesProvider(context)
+        }
 
-    @Provides
-    @Singleton
-    fun providesPlayerEntitiesProvider(application: Application): PlayerEntitiesProvider {
-        return PlayerEntitiesProvider(application)
-    }
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun providesGlobalPlayerEventListener(): GlobalPlayerEventListener {
+            return GlobalPlayerEventListener()
+        }
 
-    @Provides
-    @Singleton
-    fun providesGlobalPlayerEventListener(): GlobalPlayerEventListener {
-        return GlobalPlayerEventListener()
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun providesPlayerController(
+            playerEntitiesProvider: PlayerEntitiesProvider,
+            globalPlayerEventListener: GlobalPlayerEventListener
+        ): PlayerController {
+            return PlayerController(
+                playerEntitiesProvider,
+                globalPlayerEventListener
+            )
+        }
     }
+}
 
-    @Provides
+@Module(includes = [AndroidInjectionModule::class])
+abstract class ContextModule {
     @Singleton
-    fun providesPlayerController(
-        playerEntitiesProvider: PlayerEntitiesProvider,
-        globalPlayerEventListener: GlobalPlayerEventListener
-    ): PlayerController {
-        return PlayerController(
-            playerEntitiesProvider,
-            globalPlayerEventListener
-        )
-    }
+    @Binds
+    @AppContext
+    abstract fun bindContext(app: SmoothPlayerApplication): Context
 }
