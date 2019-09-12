@@ -8,5 +8,7 @@ import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(private val songsRepository: SongsRepository) :
     ViewModel() {
-    val songs: LiveData<ArrayList<SongModel>?> = songsRepository.songLibrary
+    val songs: LiveData<ArrayList<SongModel>?> get() {
+        return songsRepository.songLibrary
+    }
 }

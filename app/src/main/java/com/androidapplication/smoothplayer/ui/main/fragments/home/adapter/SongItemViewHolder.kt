@@ -16,9 +16,9 @@ private const val ALBUM_ART_SIZE_MULTIPLIER = 0.35f
 class MusicItemViewHolder(viewGroup: ViewGroup) :
     BaseMusicInfoViewHolder(viewGroup) {
 
-    private val albumArtImageView: ImageView = viewGroup.albumImageView
-    private val artistNameTextView: TextView = viewGroup.artistNameTextView
-    private val songNameTextView: TextView = viewGroup.songNameTextView
+    private val albumArtImageView: ImageView = viewGroup.view_holder_album_image_view
+    private val artistNameTextView: TextView = viewGroup.view_holder_artist_name_text_view
+    private val songNameTextView: TextView = viewGroup.view_holder_song_name_text_view
 
     override fun bindData(context: Context, baseInfoModel: BaseInfoModel) {
         with(baseInfoModel as SongModel) {
