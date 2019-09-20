@@ -46,5 +46,11 @@
         </item>
     </style>
 
+    <style name="fits_system_window">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
     <dimen name="player_bar_buttons_margins">4dp</dimen>
 </resources>
