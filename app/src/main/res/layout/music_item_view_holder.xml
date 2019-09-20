@@ -8,8 +8,8 @@
 
     <ImageView
             android:id="@+id/view_holder_album_image_view"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
@@ -23,29 +23,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             android:layout_marginEnd="16dp"
             android:maxLines="1"
             android:textSize="15sp"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view_holder_album_image_view"
             app:layout_constraintTop_toTopOf="@+id/view_holder_album_image_view"
-            tools:text="SONG_TITLE" />
+            tools:text="SONG_TITLESONG_TITLESONG_TITLESONG_TITLESONG_TITLESONG_TITLESONG_TITLESONG_TITLE" />
 
     <TextView
             android:id="@+id/view_holder_artist_name_text_view"
             style="@style/musicItemViewHolderTextStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:maxWidth="250dp"
             android:maxLines="1"
+            android:ellipsize="end"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/view_holder_album_image_view"
-            app:layout_constraintStart_toEndOf="@+id/view_holder_album_image_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/view_holder_song_name_text_view"
             app:layout_constraintTop_toBottomOf="@+id/view_holder_song_name_text_view"
-            tools:text="THIS_IS" />
+            tools:text="THIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_ISTHIS_IS" />
 
     <TextView
             android:id="@+id/view_holder_album_name_text_view"
@@ -53,14 +52,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:maxWidth="100dp"
-            android:textSize="13sp"
+            android:maxWidth="230dp"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@id/view_holder_artist_name_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:ellipsize="end"
+            android:textSize="13sp"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/view_holder_song_name_text_view"
             app:layout_constraintStart_toEndOf="@+id/view_holder_artist_name_text_view"
             app:layout_constraintTop_toBottomOf="@+id/view_holder_song_name_text_view"
-            tools:text="" />
+            tools:text="NOTIMPORTANTNOTIMPORTANTNOTIMPORTANTNOTIMPORTANTNOTIMPORTANTNOTIMPORTANT" />
 </androidx.constraintlayout.widget.ConstraintLayout>
